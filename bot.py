@@ -129,7 +129,7 @@ def main():
     app.add_handler(CommandHandler("unsubscribe", unsubscribe))
     app.add_handler(CallbackQueryHandler(button))
 
-    schedule_broadcast(app, load_subs)
+    schedule_broadcast(app)
 
     app.run_polling(drop_pending_updates=True)
 
