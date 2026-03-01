@@ -22,14 +22,13 @@ class _Health(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
     def log_message(self, *a):
-        pass  # silence noisy access logs
+        pass
 
 def _start_health_server():
     port = int(os.environ.get("PORT", 8080))
     HTTPServer(("0.0.0.0", port), _Health).serve_forever()
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Load token — from Render env vars or local .env file
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 if not TOKEN:
     env_path = pathlib.Path(".env")
@@ -95,27 +94,28 @@ async def button(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     await query.answer()
     data = query.data
 
-    players = get_players()
-    gw      = get_current_gw()
-
-    if data == "brief":
-        text = build_brief(players, gw)
-    elif data == "captain":
-        text = get_captain_picks(players)
-    elif data == "transfers":
-        text = get_transfers(players)
-    elif data == "diffs":
-        text = get_differentials(players)
-    elif data == "chips":
-        text = get_chip_advice(gw)
-    else:
-        text = "Unknown option."
+    try:
+        if data == "brief":
+            text = build_brief()
+        elif data == "captain":
+            text = get_captain_picks()
+        elif data == "transfers":
+            text = get_transfers()
+        elif data == "diffs":
+            text = get_differentials()
+        elif data == "chips":
+            text = get_chip_advice()
+        else:
+            text = "Unknown option."
+    except Exception as e:
+        log.error(f"Button error [{data}]: {e}", exc_info=True)
+        text = f"⚠️ Something went wrong. Try again in a moment."
 
     await query.edit_message_text(text, parse_mode="Markdown")
 
 
 def main():
-    # Start health server in background thread FIRST so Render sees the port
+    # Start health server first so Render sees the port immediately
     threading.Thread(target=_start_health_server, daemon=True).start()
     log.info("Health server started on PORT %s", os.environ.get("PORT", 8080))
 
@@ -123,7 +123,12 @@ def main():
     refresh_cache()
     log.info("Starting SportsClaw bot...")
 
-    app = Application.builder().token(TOKEN).build()
+    app = (
+        Application.builder()
+        .token(TOKEN)
+        .build()
+    )
+
     app.add_handler(CommandHandler("start",       start))
     app.add_handler(CommandHandler("subscribe",   subscribe))
     app.add_handler(CommandHandler("unsubscribe", unsubscribe))
@@ -131,7 +136,10 @@ def main():
 
     schedule_broadcast(app)
 
-    app.run_polling(drop_pending_updates=True)
+    app.run_polling(
+        drop_pending_updates=True,
+        allowed_updates=Update.ALL_TYPES,
+    )
 
 
 if __name__ == "__main__":
