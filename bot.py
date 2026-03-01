@@ -44,3 +44,4 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         "Autonomous FPL agent — captain picks, transfers, differentials "
         "and chip advice before every deadline.\n\n"
         "Tap a button or type a command:",
+    )
