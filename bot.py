@@ -14,17 +14,23 @@ from broadcaster import schedule_broadcast
 logging.basicConfig(format="%(asctime)s [%(levelname)s] %(message)s", level=logging.INFO)
 log = logging.getLogger("SportsClaw")
 
-# Load .env
-env_path = pathlib.Path(".env")
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        if "=" in line and not line.startswith("#"):
-            k, v = line.split("=", 1)
-            os.environ[k.strip()] = v.strip()
-
+# Load token — from Render env vars or local .env file
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 if not TOKEN:
-    raise RuntimeError("TELEGRAM_BOT_TOKEN not set in .env")
+    env_path = pathlib.Path(".env")
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            if "=" in line and not line.startswith("#"):
+                k, v = line.split("=", 1)
+                if k.strip() == "TELEGRAM_BOT_TOKEN":
+                    TOKEN = v.strip()
+                    break
+
+if not TOKEN:
+    log.error("TELEGRAM_BOT_TOKEN not found! Set it as an environment variable on Render.")
+    raise SystemExit(1)
+
+log.info(f"Token loaded — starts with: {TOKEN[:10]}...")
 
 SUBS_FILE = pathlib.Path(".subscribers.json")
 def load_subs(): return json.loads(SUBS_FILE.read_text()) if SUBS_FILE.exists() else []
@@ -39,9 +45,3 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("🎯 Differentials",    callback_data="diffs")],
         [InlineKeyboardButton("🃏 Chip Advice",      callback_data="chips")],
     ])
-    await update.message.reply_markdown(
-        f"🏆 *Welcome to SportsClaw, {name}!*\n\n"
-        "Autonomous FPL agent — captain picks, transfers, differentials "
-        "and chip advice before every deadline.\n\n"
-        "Tap a button or type a command:",
-    )
