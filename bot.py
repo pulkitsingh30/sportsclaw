@@ -127,7 +127,7 @@ async def button(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     elif d == "diffs":   await cmd_diffs(update, ctx)
     elif d == "chips":   await cmd_chips(update, ctx)
 
-def main():
+async def main():
     log.info("Loading FPL data...")
     refresh_cache()
     log.info("Starting SportsClaw bot...")
@@ -150,7 +150,8 @@ def main():
     schedule_broadcast(app)
 
     log.info("Bot is live! Open Telegram -> @SportsClawBot -> /start")
-    app.run_polling(allowed_updates=["message","callback_query"])
+    await app.run_polling(allowed_updates=["message","callback_query"])
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
