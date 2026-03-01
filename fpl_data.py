@@ -76,3 +76,57 @@ def get_players():    return _cache["players"]
 def get_current_gw(): return _cache["current_gw"]
 def get_fixtures(gw=None):
     return [f for f in _cache["fixtures"] if f.get("event") == gw] if gw else _cache["fixtures"]
+
+
+def get_team_snapshot(team_id, gw=None):
+    """Fetch a manager's current squad snapshot with bank and names."""
+    players = get_players()
+    if not players:
+        refresh_cache()
+        players = get_players()
+    if not players:
+        return None, "FPL player cache is empty. Try again soon."
+
+    current = get_current_gw()
+    gw_id = gw or (current.get("id") if current else None)
+    if not gw_id:
+        return None, "Unable to determine current gameweek."
+
+    try:
+        entry = requests.get(f"{BASE}/entry/{int(team_id)}/", timeout=15).json()
+        picks = requests.get(f"{BASE}/entry/{int(team_id)}/event/{int(gw_id)}/picks/", timeout=15).json()
+    except Exception as e:
+        log.error("Team fetch failed for %s: %s", team_id, e)
+        return None, "Could not load that FPL team right now."
+
+    if isinstance(entry, dict) and entry.get("detail"):
+        return None, f"FPL team not found: {entry.get('detail')}"
+    if isinstance(picks, dict) and picks.get("detail"):
+        return None, f"Could not load picks: {picks.get('detail')}"
+
+    picks_list = picks.get("picks", []) if isinstance(picks, dict) else []
+    if not picks_list:
+        return None, "No picks found for this team in the current GW."
+
+    by_id = {p["id"]: p for p in players}
+    owned = []
+    for pick in picks_list:
+        pid = pick.get("element")
+        player = by_id.get(pid)
+        if not player:
+            continue
+        owned.append({**player, "multiplier": pick.get("multiplier", 1), "is_captain": pick.get("is_captain", False)})
+
+    history = picks.get("entry_history", {}) if isinstance(picks, dict) else {}
+    bank = history.get("bank", 0) / 10
+
+    snapshot = {
+        "team_id": int(team_id),
+        "manager_name": (entry or {}).get("player_name", ""),
+        "entry_name": (entry or {}).get("name", ""),
+        "players": owned,
+        "player_ids": {p["id"] for p in owned},
+        "bank": bank,
+        "gw": int(gw_id),
+    }
+    return snapshot, None

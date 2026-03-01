@@ -12,4 +12,9 @@ python3 bot.py
 ```
 
 ## Commands
-/brief /captain /transfers /diffs /chips /myteam /subscribe
+/start /help /brief /captain /transfers /diffs /chips /myteam /unlinkteam /subscribe /unsubscribe
+
+### Link your FPL team for personalised advice
+- `/myteam <fpl_team_id>`
+- Example: `/myteam 1234567`
+- To remove link: `/unlinkteam`
