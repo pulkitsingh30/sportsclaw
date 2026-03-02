@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WinbackFlow PoC Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; background: #0f172a; color: #e2e8f0; }
+    h1 { margin: 0 0 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .card { background: #1e293b; border-radius: 10px; padding: 14px; }
+    .card.clickable { cursor: pointer; border: 1px solid #334155; }
+    .card.clickable:hover { border-color: #60a5fa; }
+    .cardLink { color: inherit; text-decoration: none; display: block; }
+    .label { color: #94a3b8; font-size: 13px; }
+    .value { font-size: 28px; font-weight: bold; margin-top: 4px; }
+    .bar-wrap { background: #334155; border-radius: 8px; overflow: hidden; height: 22px; margin-top: 8px; }
+    .bar-acc { background: #22c55e; height: 22px; float: left; }
+    .bar-rej { background: #ef4444; height: 22px; float: left; }
+    pre { background: #020617; padding: 12px; border-radius: 8px; overflow: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #334155; padding: 8px; text-align: left; font-size: 13px; }
+    th { color: #94a3b8; }
+    #detailsTitle { margin: 0 0 10px; }
+    .nav { display:flex; gap:10px; margin: 10px 0 16px; flex-wrap: wrap; }
+    .nav a { color: #93c5fd; text-decoration:none; background:#1e293b; border:1px solid #334155; padding:6px 10px; border-radius:8px; font-size: 13px; }
+    .nav a:hover { border-color:#60a5fa; }
+  </style>
+</head>
+<body>
+  <h1>WinbackFlow KPI Dashboard</h1>
+  <div class="nav">
+    <a href="#detail-targeted">Jump: Targeted</a>
+    <a href="#detail-accepted">Jump: Accepted</a>
+    <a href="#detail-rejected">Jump: Rejected</a>
+    <a href="#top-kpis">Jump: KPI Cards</a>
+    <a href="#raw-summary">Jump: Raw Summary</a>
+  </div>
+  <div id="top-kpis"></div>
+  <div class="grid">
+    <div class="card clickable" data-detail="targeted"><a class="cardLink" href="#detail-targeted"><div class="label">Targeted Customers</div><div class="value">6</div></a></div>
+    <div class="card"><div class="label">Recommendation Action Rate</div><div class="value">33.33%</div></div>
+    <div class="card clickable" data-detail="accepted"><a class="cardLink" href="#detail-accepted"><div class="label">Accepted Recommendations</div><div class="value">2</div></a></div>
+    <div class="card clickable" data-detail="rejected"><a class="cardLink" href="#detail-rejected"><div class="label">Rejected Recommendations</div><div class="value">4</div></a></div>
+    <div class="card"><div class="label">Delivery Success Rate</div><div class="value">100.00%</div></div>
+    <div class="card"><div class="label">Approval Blocked Count</div><div class="value">0</div></div>
+    <div class="card"><div class="label">P95 Delivery Latency (ms)</div><div class="value">19</div></div>
+    <div class="card"><div class="label">Projected Recovered Revenue</div><div class="value">$63.00</div></div>
+  </div>
+  <div class="card" id="detail-targeted" style="margin-top: 14px;">
+    <h3 style="margin: 0 0 10px;">Drill-down: Targeted Customers</h3>
+    <table><thead><tr><th>user_id</th><th>action</th><th>confidence</th><th>channel</th></tr></thead><tbody><tr><td>c_1001</td><td>send_winback_discount_offer</td><td>0.95</td><td>email</td></tr><tr><td>c_1002</td><td>send_winback_discount_offer</td><td>0.8</td><td>sms</td></tr><tr><td>c_1003</td><td>send_winback_discount_offer</td><td>0.95</td><td>email</td></tr><tr><td>c_1004</td><td>send_winback_discount_offer</td><td>0.6</td><td>sms</td></tr><tr><td>c_1005</td><td>send_winback_discount_offer</td><td>0.89</td><td>email</td></tr><tr><td>c_1006</td><td>send_winback_discount_offer</td><td>0.58</td><td>email</td></tr></tbody></table>
+  </div>
+  <div class="card" id="detail-accepted" style="margin-top: 14px;">
+    <h3 style="margin: 0 0 10px;">Drill-down: Accepted Recommendations</h3>
+    <table><thead><tr><th>user_id</th><th>accepted</th><th>channel</th></tr></thead><tbody><tr><td>c_1001</td><td>True</td><td>email</td></tr><tr><td>c_1003</td><td>True</td><td>email</td></tr></tbody></table>
+  </div>
+  <div class="card" id="detail-rejected" style="margin-top: 14px;">
+    <h3 style="margin: 0 0 10px;">Drill-down: Rejected Recommendations</h3>
+    <table><thead><tr><th>user_id</th><th>accepted</th><th>channel</th></tr></thead><tbody><tr><td>c_1002</td><td>False</td><td>sms</td></tr><tr><td>c_1004</td><td>False</td><td>sms</td></tr><tr><td>c_1005</td><td>False</td><td>email</td></tr><tr><td>c_1006</td><td>False</td><td>email</td></tr></tbody></table>
+  </div>
+  <div class="card" style="margin-top: 14px;">
+    <div class="label">Accepted vs Rejected Split</div>
+    <div class="bar-wrap">
+      <div class="bar-acc" style="width:33.33%"></div>
+      <div class="bar-rej" style="width:66.67%"></div>
+    </div>
+    <div style="margin-top:8px;">Accepted: 33.33% | Rejected: 66.67%</div>
+  </div>
+  <div class="card" style="margin-top: 14px;">
+    <h3 id="detailsTitle">Details: Click a card to inspect</h3>
+    <div id="detailsBody">Select `Targeted Customers`, `Accepted Recommendations`, or `Rejected Recommendations`.</div>
+  </div>
+  <div class="card" id="raw-summary" style="margin-top: 14px;">
+    <div class="label">Raw Summary</div>
+    <pre>{
+  "targeted_customers": 6,
+  "wau": 6,
+  "recommendation_action_rate": 0.3333,
+  "accepted_recommendations": 2,
+  "rejected_recommendations": 4,
+  "accepted_rejected_split": {
+    "accepted_pct": 0.3333,
+    "rejected_pct": 0.6667
+  },
+  "delivery_count": 6,
+  "approval_blocked_count": 0,
+  "delivery_success_rate": 1.0,
+  "p95_delivery_latency_ms": 19,
+  "projected_recovered_revenue": 63.0,
+  "revenue_assumption": {
+    "assumed_avg_order_value": 90.0,
+    "assumed_gross_margin": 0.35,
+    "formula": "accepted_recommendations * assumed_avg_order_value * assumed_gross_margin"
+  },
+  "event_counts": {
+    "session_started": 1,
+    "data_ingested": 6,
+    "recommendation_shown": 6,
+    "explanation_generated": 6,
+    "recommendations_pending_approval": 1,
+    "approval_applied": 1,
+    "recommendation_delivered": 6,
+    "feedback_received": 6,
+    "recommendation_accepted": 2,
+    "recommendation_rejected": 4,
+    "session_completed": 1
+  }
+}</pre>
+  </div>
+  <script>
+    const detailSets = {"targeted": [{"user_id": "c_1001", "action": "send_winback_discount_offer", "confidence": 0.95, "channel": "email"}, {"user_id": "c_1002", "action": "send_winback_discount_offer", "confidence": 0.8, "channel": "sms"}, {"user_id": "c_1003", "action": "send_winback_discount_offer", "confidence": 0.95, "channel": "email"}, {"user_id": "c_1004", "action": "send_winback_discount_offer", "confidence": 0.6, "channel": "sms"}, {"user_id": "c_1005", "action": "send_winback_discount_offer", "confidence": 0.89, "channel": "email"}, {"user_id": "c_1006", "action": "send_winback_discount_offer", "confidence": 0.58, "channel": "email"}], "accepted": [{"user_id": "c_1001", "accepted": true, "channel": "email"}, {"user_id": "c_1003", "accepted": true, "channel": "email"}], "rejected": [{"user_id": "c_1002", "accepted": false, "channel": "sms"}, {"user_id": "c_1004", "accepted": false, "channel": "sms"}, {"user_id": "c_1005", "accepted": false, "channel": "email"}, {"user_id": "c_1006", "accepted": false, "channel": "email"}]};
+    const detailsTitle = document.getElementById("detailsTitle");
+    const detailsBody = document.getElementById("detailsBody");
+
+    function renderTable(rows) {
+      if (!rows || rows.length === 0) {
+        detailsBody.innerHTML = "No rows available for this selection.";
+        return;
+      }
+      const columns = Object.keys(rows[0]);
+      let html = "<table><thead><tr>";
+      columns.forEach(c => html += `<th>${c}</th>`);
+      html += "</tr></thead><tbody>";
+      rows.forEach(r => {
+        html += "<tr>";
+        columns.forEach(c => html += `<td>${String(r[c])}</td>`);
+        html += "</tr>";
+      });
+      html += "</tbody></table>";
+      detailsBody.innerHTML = html;
+    }
+
+    document.querySelectorAll(".card.clickable").forEach(card => {
+      card.addEventListener("click", () => {
+        const key = card.getAttribute("data-detail");
+        if (key === "targeted") detailsTitle.textContent = "Details: Targeted Customers";
+        if (key === "accepted") detailsTitle.textContent = "Details: Accepted Recommendations";
+        if (key === "rejected") detailsTitle.textContent = "Details: Rejected Recommendations";
+        renderTable(detailSets[key] || []);
+      });
+    });
+  </script>
+</body>
+</html>

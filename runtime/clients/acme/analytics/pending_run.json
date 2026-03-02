@@ -1,0 +1,60 @@
+{
+  "context": {
+    "workflow_id": "customer_reactivation_v1",
+    "session_id": "bb3efd54-bb89-48a6-8b79-275572e6a6de",
+    "started_at_utc": "2026-03-01T23:39:58.893718+00:00",
+    "metadata": {}
+  },
+  "profiles": [
+    {
+      "user_id": "u1",
+      "email": "a@x.com",
+      "full_name": "A X",
+      "days_since_last_order": 424,
+      "total_orders": 1,
+      "total_spend": 20.0,
+      "avg_order_value": 20.0,
+      "purchase_score": 0.02,
+      "engagement_score": 0.1,
+      "primary_category": "beauty",
+      "channel": "email"
+    }
+  ],
+  "targeted_profiles": [
+    {
+      "user_id": "u1",
+      "email": "a@x.com",
+      "full_name": "A X",
+      "days_since_last_order": 424,
+      "total_orders": 1,
+      "total_spend": 20.0,
+      "avg_order_value": 20.0,
+      "purchase_score": 0.02,
+      "engagement_score": 0.1,
+      "primary_category": "beauty",
+      "channel": "email"
+    }
+  ],
+  "recommendations": [
+    {
+      "recommendation_id": "221a4938e99a",
+      "user_id": "u1",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.95,
+      "rationale": [
+        "Last order was 424 days ago.",
+        "Engagement score is 0.10.",
+        "Purchase score is 0.02 from lifetime spend.",
+        "Primary category affinity: beauty.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "BEAU-WIN10",
+      "suggested_message": "Hi A, we saved a comeback offer for you. Use BEAU-WIN10 for 10% off your next order."
+    }
+  ],
+  "orders_sample_count": 1,
+  "generated_latency_ms": 30,
+  "decisions": {
+    "221a4938e99a": "pending"
+  }
+}

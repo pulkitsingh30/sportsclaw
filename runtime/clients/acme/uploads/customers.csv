@@ -1,0 +1,2 @@
+customer_id,email,first_name,last_name,last_order_date,total_orders,total_spend,avg_order_value,email_engagement_score,sms_engagement_score,preferred_channel,primary_category
+u1,a@x.com,A,X,2025-01-01,1,20,20,0.1,0.1,email,beauty

@@ -1,0 +1,35 @@
+{
+  "targeted_customers": 6,
+  "wau": 6,
+  "recommendation_action_rate": 0.3333,
+  "accepted_recommendations": 2,
+  "rejected_recommendations": 0,
+  "accepted_rejected_split": {
+    "accepted_pct": 1.0,
+    "rejected_pct": 0.0
+  },
+  "delivery_count": 2,
+  "approval_blocked_count": 0,
+  "manager_approved_count": 2,
+  "manager_rejected_count": 0,
+  "delivery_success_rate": 0.3333,
+  "p95_delivery_latency_ms": 3,
+  "projected_recovered_revenue": 63.0,
+  "revenue_assumption": {
+    "assumed_avg_order_value": 90.0,
+    "assumed_gross_margin": 0.35,
+    "formula": "accepted_recommendations * assumed_avg_order_value * assumed_gross_margin"
+  },
+  "event_counts": {
+    "session_started": 1,
+    "data_ingested": 6,
+    "recommendation_shown": 6,
+    "explanation_generated": 6,
+    "recommendations_pending_approval": 1,
+    "approval_applied": 1,
+    "recommendation_delivered": 2,
+    "feedback_received": 2,
+    "recommendation_accepted": 2,
+    "session_completed": 1
+  }
+}

@@ -1,0 +1,7 @@
+customer_id,email,first_name,last_name,signup_date,last_order_date,total_orders,total_spend,avg_order_value,email_engagement_score,sms_engagement_score,preferred_channel,primary_category
+c_1001,alice@example.com,Alice,Nguyen,2023-01-12,2024-08-15,2,120.00,60.00,0.12,0.05,email,skincare
+c_1002,bob@example.com,Bob,Singh,2022-11-03,2025-01-20,6,540.00,90.00,0.34,0.22,sms,supplements
+c_1003,chloe@example.com,Chloe,Tran,2024-02-08,2024-06-22,1,49.00,49.00,0.08,0.02,email,apparel
+c_1004,dan@example.com,Dan,Martin,2021-07-19,2025-02-10,11,1180.00,107.27,0.71,0.63,sms,fitness
+c_1005,emma@example.com,Emma,Patel,2023-09-30,2024-11-05,3,280.00,93.33,0.19,0.14,email,beauty
+c_1006,frank@example.com,Frank,Lee,2020-04-04,2025-02-22,14,2100.00,150.00,0.78,0.69,email,supplements

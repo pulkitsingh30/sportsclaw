@@ -1,0 +1,270 @@
+{
+  "context": {
+    "workflow_id": "customer_reactivation_v1",
+    "session_id": "706e3667-b527-4ba4-8659-c60b255e6fab",
+    "started_at_utc": "2026-03-01T23:33:15.620121+00:00",
+    "metadata": {}
+  },
+  "profiles": [
+    {
+      "user_id": "c_1001",
+      "email": "alice@example.com",
+      "full_name": "Alice Nguyen",
+      "days_since_last_order": 563,
+      "total_orders": 2,
+      "total_spend": 120.0,
+      "avg_order_value": 60.0,
+      "purchase_score": 0.12,
+      "engagement_score": 0.096,
+      "primary_category": "skincare",
+      "channel": "email"
+    },
+    {
+      "user_id": "c_1002",
+      "email": "bob@example.com",
+      "full_name": "Bob Singh",
+      "days_since_last_order": 405,
+      "total_orders": 6,
+      "total_spend": 540.0,
+      "avg_order_value": 90.0,
+      "purchase_score": 0.54,
+      "engagement_score": 0.298,
+      "primary_category": "supplements",
+      "channel": "sms"
+    },
+    {
+      "user_id": "c_1003",
+      "email": "chloe@example.com",
+      "full_name": "Chloe Tran",
+      "days_since_last_order": 617,
+      "total_orders": 1,
+      "total_spend": 49.0,
+      "avg_order_value": 49.0,
+      "purchase_score": 0.049,
+      "engagement_score": 0.059,
+      "primary_category": "apparel",
+      "channel": "email"
+    },
+    {
+      "user_id": "c_1004",
+      "email": "dan@example.com",
+      "full_name": "Dan Martin",
+      "days_since_last_order": 384,
+      "total_orders": 11,
+      "total_spend": 1180.0,
+      "avg_order_value": 107.27,
+      "purchase_score": 1.0,
+      "engagement_score": 0.682,
+      "primary_category": "fitness",
+      "channel": "sms"
+    },
+    {
+      "user_id": "c_1005",
+      "email": "emma@example.com",
+      "full_name": "Emma Patel",
+      "days_since_last_order": 481,
+      "total_orders": 3,
+      "total_spend": 280.0,
+      "avg_order_value": 93.33,
+      "purchase_score": 0.28,
+      "engagement_score": 0.173,
+      "primary_category": "beauty",
+      "channel": "email"
+    },
+    {
+      "user_id": "c_1006",
+      "email": "frank@example.com",
+      "full_name": "Frank Lee",
+      "days_since_last_order": 372,
+      "total_orders": 14,
+      "total_spend": 2100.0,
+      "avg_order_value": 150.0,
+      "purchase_score": 1.0,
+      "engagement_score": 0.748,
+      "primary_category": "supplements",
+      "channel": "email"
+    }
+  ],
+  "targeted_profiles": [
+    {
+      "user_id": "c_1001",
+      "email": "alice@example.com",
+      "full_name": "Alice Nguyen",
+      "days_since_last_order": 563,
+      "total_orders": 2,
+      "total_spend": 120.0,
+      "avg_order_value": 60.0,
+      "purchase_score": 0.12,
+      "engagement_score": 0.096,
+      "primary_category": "skincare",
+      "channel": "email"
+    },
+    {
+      "user_id": "c_1002",
+      "email": "bob@example.com",
+      "full_name": "Bob Singh",
+      "days_since_last_order": 405,
+      "total_orders": 6,
+      "total_spend": 540.0,
+      "avg_order_value": 90.0,
+      "purchase_score": 0.54,
+      "engagement_score": 0.298,
+      "primary_category": "supplements",
+      "channel": "sms"
+    },
+    {
+      "user_id": "c_1003",
+      "email": "chloe@example.com",
+      "full_name": "Chloe Tran",
+      "days_since_last_order": 617,
+      "total_orders": 1,
+      "total_spend": 49.0,
+      "avg_order_value": 49.0,
+      "purchase_score": 0.049,
+      "engagement_score": 0.059,
+      "primary_category": "apparel",
+      "channel": "email"
+    },
+    {
+      "user_id": "c_1004",
+      "email": "dan@example.com",
+      "full_name": "Dan Martin",
+      "days_since_last_order": 384,
+      "total_orders": 11,
+      "total_spend": 1180.0,
+      "avg_order_value": 107.27,
+      "purchase_score": 1.0,
+      "engagement_score": 0.682,
+      "primary_category": "fitness",
+      "channel": "sms"
+    },
+    {
+      "user_id": "c_1005",
+      "email": "emma@example.com",
+      "full_name": "Emma Patel",
+      "days_since_last_order": 481,
+      "total_orders": 3,
+      "total_spend": 280.0,
+      "avg_order_value": 93.33,
+      "purchase_score": 0.28,
+      "engagement_score": 0.173,
+      "primary_category": "beauty",
+      "channel": "email"
+    },
+    {
+      "user_id": "c_1006",
+      "email": "frank@example.com",
+      "full_name": "Frank Lee",
+      "days_since_last_order": 372,
+      "total_orders": 14,
+      "total_spend": 2100.0,
+      "avg_order_value": 150.0,
+      "purchase_score": 1.0,
+      "engagement_score": 0.748,
+      "primary_category": "supplements",
+      "channel": "email"
+    }
+  ],
+  "recommendations": [
+    {
+      "recommendation_id": "2bc5561fbbed",
+      "user_id": "c_1001",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.95,
+      "rationale": [
+        "Last order was 563 days ago.",
+        "Engagement score is 0.10.",
+        "Purchase score is 0.12 from lifetime spend.",
+        "Primary category affinity: skincare.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "SKIN-WIN10",
+      "suggested_message": "Hi Alice, we saved a comeback offer for you. Use SKIN-WIN10 for 10% off your next order."
+    },
+    {
+      "recommendation_id": "61d6b27d48af",
+      "user_id": "c_1002",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.8,
+      "rationale": [
+        "Last order was 405 days ago.",
+        "Engagement score is 0.30.",
+        "Purchase score is 0.54 from lifetime spend.",
+        "Primary category affinity: supplements.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "SUPP-WIN10",
+      "suggested_message": "Hi Bob, we saved a comeback offer for you. Use SUPP-WIN10 for 10% off your next order."
+    },
+    {
+      "recommendation_id": "1f92a1be78c5",
+      "user_id": "c_1003",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.95,
+      "rationale": [
+        "Last order was 617 days ago.",
+        "Engagement score is 0.06.",
+        "Purchase score is 0.05 from lifetime spend.",
+        "Primary category affinity: apparel.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "APPA-WIN10",
+      "suggested_message": "Hi Chloe, we saved a comeback offer for you. Use APPA-WIN10 for 10% off your next order."
+    },
+    {
+      "recommendation_id": "51c005e50c51",
+      "user_id": "c_1004",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.6,
+      "rationale": [
+        "Last order was 384 days ago.",
+        "Engagement score is 0.68.",
+        "Purchase score is 1.00 from lifetime spend.",
+        "Primary category affinity: fitness.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "FITN-WIN10",
+      "suggested_message": "Hi Dan, we saved a comeback offer for you. Use FITN-WIN10 for 10% off your next order."
+    },
+    {
+      "recommendation_id": "261ded216f74",
+      "user_id": "c_1005",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.89,
+      "rationale": [
+        "Last order was 481 days ago.",
+        "Engagement score is 0.17.",
+        "Purchase score is 0.28 from lifetime spend.",
+        "Primary category affinity: beauty.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "BEAU-WIN10",
+      "suggested_message": "Hi Emma, we saved a comeback offer for you. Use BEAU-WIN10 for 10% off your next order."
+    },
+    {
+      "recommendation_id": "d2b40e3e504a",
+      "user_id": "c_1006",
+      "action": "send_winback_discount_offer",
+      "confidence": 0.58,
+      "rationale": [
+        "Last order was 372 days ago.",
+        "Engagement score is 0.75.",
+        "Purchase score is 1.00 from lifetime spend.",
+        "Primary category affinity: supplements.",
+        "Action selected: send_winback_discount_offer."
+      ],
+      "offer_code": "SUPP-WIN10",
+      "suggested_message": "Hi Frank, we saved a comeback offer for you. Use SUPP-WIN10 for 10% off your next order."
+    }
+  ],
+  "orders_sample_count": 8,
+  "generated_latency_ms": 139,
+  "decisions": {
+    "2bc5561fbbed": "pending",
+    "61d6b27d48af": "pending",
+    "1f92a1be78c5": "pending",
+    "51c005e50c51": "approved",
+    "261ded216f74": "pending",
+    "d2b40e3e504a": "pending"
+  }
+}

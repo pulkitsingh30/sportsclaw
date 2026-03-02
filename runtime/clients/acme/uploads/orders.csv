@@ -1,0 +1,2 @@
+order_id,customer_id,order_date,order_total,discount_used,category,purchase_channel
+o1,u1,2025-01-01,20,true,beauty,online
